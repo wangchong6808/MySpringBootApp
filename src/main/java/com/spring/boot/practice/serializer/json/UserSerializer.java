@@ -18,7 +18,7 @@ import java.io.IOException;
 @JsonComponent
 public class UserSerializer {
 
-    public static class Serializer extends JsonSerializer<User> {
+    /*public static class Serializer extends JsonSerializer<User> {
 
         @Override
         public void serialize(User user, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
@@ -30,7 +30,7 @@ public class UserSerializer {
             jsonGenerator.writeEndObject();
         }
 
-    }
+    }*/
     /*
     public static class Deserializer extends JsonDeserializer<User> {
 

@@ -6,30 +6,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
-
 /**
  * Created by wangchong on 9/18/16.
+ <html>
+ <body>
+ <form action="http://localhost:8080/app/upload/submit" method="post" enctype="multipart/form-data">
+ <input type="file" name="file" />
+ <input type="text" name="text" />
+ <input type="submit" value="submit" />
+ </form>
+ </body>
+ </html>
  */
 @RestController
-@RequestMapping(value="/app/base")
-public class MyRestController {
+@RequestMapping(value="/app/upload")
+public class MultipartRestController {
 
     @Autowired
     MyRestTemplate myRestTemplate;
 
-    private static final Logger logger = Logger.getLogger(MyRestController.class);
+    private static final Logger logger = Logger.getLogger(MultipartRestController.class);
 
     @RequestMapping(value="/{user_id}", method=RequestMethod.GET)
     public String getUser(@PathVariable Long user_id) {
         String template = "http://localhost:8080/customer/%s";
         String link = String.format(template,String.valueOf(user_id));
-        logger.info(link);
+        System.out.println(link);
         String result = myRestTemplate.getTemplate().getForObject(link, String.class);
         return result;
     }
 
-    @RequestMapping(value="/upload")
+    @RequestMapping(value="/submit")
     public String uploadFile(@RequestParam MultipartFile file,@RequestParam String text){
 
         String name = file.getOriginalFilename();

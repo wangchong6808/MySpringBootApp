@@ -1,12 +1,19 @@
 package com.spring.boot.practice.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by wangchong on 9/18/16.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Person {
+
+    @JsonProperty("JavaClassName")
+    public String getClassName(){
+        return this.getClass().getCanonicalName();
+    }
+
     private String id;
 
     private String introduction;

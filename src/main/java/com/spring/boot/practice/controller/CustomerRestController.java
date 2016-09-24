@@ -2,6 +2,7 @@ package com.spring.boot.practice.controller;
 
 import com.spring.boot.practice.model.Customer;
 import com.spring.boot.practice.model.User;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,8 @@ import java.util.Random;
 @RestController
 @RequestMapping(value="/customer")
 public class CustomerRestController {
+
+    private static final Logger logger = Logger.getLogger(CustomerRestController.class);
 
     @RequestMapping(value="/{customer_id}", method=RequestMethod.GET)
     public Customer getUser(@PathVariable Long customer_id, @ModelAttribute Customer customer) {
@@ -30,11 +33,11 @@ public class CustomerRestController {
         if(customer.getAddress()==null){
             customer.setAddress("my address is Beijing.");
         }
-        try {
+        /*try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         return customer;
     }
 

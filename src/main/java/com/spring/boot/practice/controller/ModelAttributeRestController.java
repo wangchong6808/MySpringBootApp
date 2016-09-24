@@ -2,6 +2,7 @@ package com.spring.boot.practice.controller;
 
 import com.spring.boot.practice.model.Customer;
 import com.spring.boot.practice.model.User;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,11 @@ import java.util.Random;
 @RequestMapping(value="/model")
 public class ModelAttributeRestController {
 
+    private static final Logger logger = Logger.getLogger(ModelAttributeRestController.class);
+
     @RequestMapping(value="/greeting/{name}", method=RequestMethod.GET)
     public User greetUser(@PathVariable String name, HttpEntity<byte[]> requestEntity, @ModelAttribute User user, @ModelAttribute("myUser") User myuser){
-        System.out.println("greetUser method called......");
+        logger.info("greetUser method called......");
         //user's introduction is "my name is tom", means it is overridden by value in request,
         // but id which is set in createUser method is still here.
         //the test proved that User is initialized in @ModelAttribute method then apply values from request in @RequestMapping method
@@ -30,7 +33,7 @@ public class ModelAttributeRestController {
 
     @ModelAttribute
     public User createUser(@RequestParam(required = false) String name){
-        System.out.println("createUser method called......");
+        logger.info("createUser method called......");
         User user = new User();
         user.setName(name);
         user.setId(String.valueOf(new Random(10).nextInt()));
@@ -40,7 +43,7 @@ public class ModelAttributeRestController {
 
     @ModelAttribute
     public void createUser(@RequestParam(required = false) String name, Model model){
-        System.out.println("createUser11 method called......");
+        logger.info("createUser11 method called......");
         User user = new User();
         user.setName(name);
         user.setId(String.valueOf(new Random(5).nextInt()));
