@@ -28,9 +28,6 @@ public class UserRestController {
     @Autowired
     MyRestTemplate myRestTemplate;
 
-    @Autowired
-    private MongoDbFactory mongoDbFactory;
-
     private static final Logger logger = Logger.getLogger(UserRestController.class);
 
     @RequestMapping(value="/{user}", method=RequestMethod.GET)
@@ -57,6 +54,7 @@ public class UserRestController {
     @RequestMapping(value="/greeting/{name}", method=RequestMethod.GET)
     public User greetUser(@PathVariable String name, HttpEntity<byte[]> requestEntity, @ModelAttribute User user){
         logger.info("greetUser method called......");
+
         //user.setIntroduction("this is newly created user.");
         return user;
         //return getUser(111l);
@@ -72,11 +70,7 @@ public class UserRestController {
         user.setName(name);
         user.setId(String.valueOf(new Random(10).nextInt()));
         user.setIntroduction("this is newly created user.");
-        Document doc = new Document("name", "MongoDB")
-                .append("type", "database")
-                .append("count", 1)
-                .append("info", new Document("x", 203).append("y", 102));
-        mongoDbFactory.getDb()
+        mongo();
         return user;
     }
 
@@ -103,11 +97,11 @@ public class UserRestController {
                 .append("count", 1)
                 .append("info", new Document("x", 203).append("y", 102));
 
-        MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017,localhost:27018,localhost:27019");
+        MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017");
         MongoClient mongoClient = new MongoClient(connectionString);
 
-        MongoDatabase database = mongoClient.getD.getDatabase("mydb");
-        database.getCollection("").insertOne(doc);
+        MongoDatabase database = mongoClient.getDatabase("mydb");
+        database.getCollection("customer").insertOne(doc);
     }
 
 }

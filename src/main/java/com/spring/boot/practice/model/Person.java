@@ -2,6 +2,7 @@ package com.spring.boot.practice.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
 
 /**
  * Created by wangchong on 9/18/16.
@@ -14,6 +15,7 @@ public class Person {
         return this.getClass().getCanonicalName();
     }
 
+    @Id
     private String id;
 
     private String introduction;

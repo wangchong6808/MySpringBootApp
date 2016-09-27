@@ -1,13 +1,11 @@
 package com.spring.boot.practice.controller;
 
-import com.spring.boot.practice.model.Customer;
 import com.spring.boot.practice.model.User;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Random;
 
 /**

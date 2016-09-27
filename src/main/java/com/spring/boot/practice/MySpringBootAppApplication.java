@@ -24,9 +24,8 @@ public class MySpringBootAppApplication {
 		app.addListeners((ApplicationEvent event) -> {
 			logger.info("event :::::::::::::"+event.toString());
 		});
+		//app.setWebEnvironment(false);
 		app.run(args);
 		logger.info("app type"+app.getMainApplicationClass());
 	}
-
-
 }

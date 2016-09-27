@@ -22,7 +22,7 @@ public class MyRestController {
 
     @RequestMapping(value="/{user_id}", method=RequestMethod.GET)
     public String getUser(@PathVariable Long user_id) {
-        String template = "http://localhost:8080/customer/%s";
+        String template = "http://localhost:8080/app/customer/%s";
         String link = String.format(template,String.valueOf(user_id));
         logger.info(link);
         String result = myRestTemplate.getTemplate().getForObject(link, String.class);
