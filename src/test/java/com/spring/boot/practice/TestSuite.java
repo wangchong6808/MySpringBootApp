@@ -5,6 +5,7 @@ import com.spring.boot.practice.service.CustomerServiceTest;
 import com.spring.boot.practice.service.ServiceTestSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.springframework.test.annotation.ProfileValueSourceConfiguration;
 
 /**
  * Created by wangchong on 9/27/16.

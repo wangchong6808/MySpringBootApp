@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface CustomerRepository extends MongoRepository<Customer, String> {
 
-    public Customer findByName(String name);
+    public List<Customer> findByName(String name);
     public List<Customer> findByAddress(String address);
 
 }

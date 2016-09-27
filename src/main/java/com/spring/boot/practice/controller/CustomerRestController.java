@@ -40,14 +40,12 @@ public class CustomerRestController {
     @RequestMapping(value="/{customer_id}", method=RequestMethod.GET)
     public Customer getUser(@PathVariable Long customer_id, @ModelAttribute Customer customer) {
         customer = customerService.findOne(String.valueOf(customer_id));
-        MongoDatabase database = MongoDBClient.getDBClient().getDatabase("mydb");
-        MongoCollection<Document> collection = database.getCollection("customer");
-        List<Document> foundDocument = collection.find().into(new ArrayList<Document>());
-        foundDocument.forEach((document -> {
-            System.out.println(document.getString("_id"));
-            System.out.println(document.getString("address"));
-            //document.get
-        }));
+
+        return customer;
+    }
+
+    @RequestMapping(value="/{customer_id}", method=RequestMethod.PUT)
+    public Customer updateUser(@PathVariable Long customer_id, @ModelAttribute Customer customer) {
         List<Customer> customers = customerService.find(new Query(where("name").is("Jack").andOperator(where("address").is("my address is Beijing."))));
         if (customers!=null && customers.size()>0){
             Customer customer1 = customers.get(0);

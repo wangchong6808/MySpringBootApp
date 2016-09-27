@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -44,6 +45,11 @@ public class CustomerService {
         return mongoTemplate.find(query,Customer.class, Collections.customer.name());
     }
 
+    public List<Customer> findByName(String name){
+        return customerRepository.findByName(name);
+    }
+
+    @Transactional
     public void save(Customer customer){
         mongoTemplate.save(customer);
     }
@@ -58,4 +64,11 @@ public class CustomerService {
         return mongoTemplate.mapReduce(query, Collections.customer.name(),mapFunction, reduceFunction, MapReduceOptions.options().outputCollection(collectionName), entityClass);
     }
 
+    public void delete(Customer customer){
+        customerRepository.delete(customer);
+    }
+
+    public void delete(String id){
+        customerRepository.delete(id);
+    }
 }

@@ -17,6 +17,10 @@ public class Test {
         //Event<> e = new Event<>("","hello");
         //Object t = service::handleEvent;
         List<String> list = new ArrayList<>();
+
+        System.out.println(Double.valueOf(Math.random()));
+        System.out.println(Double.valueOf(Math.random()));
+        System.out.println(Double.valueOf(Math.random()));
     }
 
     private static void say(String words, FunctionalInterface fn){
