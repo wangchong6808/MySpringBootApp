@@ -1,5 +1,6 @@
 package com.spring.boot.practice.service;
 
+import com.spring.boot.practice.MongoDBClient;
 import com.spring.boot.practice.model.Customer;
 import com.spring.boot.practice.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class CustomerService {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
+    @Autowired
+    MongoDBClient mogngoClient;
 
 
     /*public int update(Query query, Update update, String collectionName){

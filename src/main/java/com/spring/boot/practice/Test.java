@@ -12,7 +12,7 @@ public class Test {
         }
     }
 
-    public static void main(String... args){
+    public static void main1(String... args){
         Service service = new Service();
         //Event<> e = new Event<>("","hello");
         //Object t = service::handleEvent;

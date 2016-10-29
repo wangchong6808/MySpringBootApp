@@ -1,4 +1,4 @@
-package com.spring.boot.practice.controller;
+package com.daimler.otr.controller;
 
 import com.spring.boot.practice.TestProfileValueSource;
 import org.apache.log4j.Logger;
@@ -14,7 +14,6 @@ import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.restdocs.hypermedia.LinksSnippet;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.FieldDescriptor;
-import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.annotation.IfProfileValue;
 import org.springframework.test.annotation.ProfileValueSourceConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,15 +24,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
-import static org.springframework.restdocs.snippet.Attributes.attributes;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.snippet.Attributes.key;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -70,9 +62,10 @@ public class CustomerRestControllerTest {
                 .withScheme("https")
                 .withHost("example.com")
                 .withPort(443)).build();*/
-        logger.info("setup is done.....................");
         //this.mockMvc = MockMvcBuilders.standaloneSetup(new CustomerRestController()).build();
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        logger.info("setup is done.....................");
+
     }
 
     @After

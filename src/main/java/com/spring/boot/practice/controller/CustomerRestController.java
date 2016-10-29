@@ -10,6 +10,7 @@ import com.spring.boot.practice.service.ValueObject;
 import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -35,6 +36,12 @@ public class CustomerRestController {
     @Autowired
     CustomerService customerService;
 
+    @Value("${LC_CTYPE}")
+    private String charset;
+
+    public CustomerRestController(){
+        logger.info("charset is ---"+charset);
+    }
 
 
     @RequestMapping(value="/{customer_id}", method=RequestMethod.GET)

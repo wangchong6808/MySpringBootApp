@@ -20,18 +20,18 @@ import java.util.Date;
 
 /**
  * Created by wangchong on 9/18/16.
- <html>
- <body>
- <form action="http://localhost:8080/app/contract" method="post" enctype="multipart/form-data">
- <input type="file" name="file" />
- <input type="text" name="text" />
- <input type="submit" value="submit" />
- </form>
- </body>
- </html>
+ * <html>
+ * <body>
+ * <form action="http://localhost:8080/app/contract" method="post" enctype="multipart/form-data">
+ * <input type="file" name="file" />
+ * <input type="text" name="text" />
+ * <input type="submit" value="submit" />
+ * </form>
+ * </body>
+ * </html>
  */
 @RestController
-@RequestMapping(value="/app/contract")
+@RequestMapping(value = "/app/contract")
 public class MultipartRestController {
 
     @Autowired
@@ -42,25 +42,25 @@ public class MultipartRestController {
 
     private static final Logger logger = Logger.getLogger(MultipartRestController.class);
 
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public void getContract(HttpServletResponse response, OutputStream outputStream, @PathVariable Long id) throws IOException {
         Contract contract = contractRepository.findOne(String.valueOf(id));
         response.setContentType(MediaType.IMAGE_JPEG.getType());
-        response.setHeader("content-disposition","inline; filename="+contract.getFileName());
+        response.setHeader("content-disposition", "inline; filename=" + contract.getFileName());
         outputStream.write(contract.getContent().getData());
         //contract.setContent(null);
     }
 
-    @RequestMapping(method=RequestMethod.POST)
-    public String uploadFile(@RequestParam MultipartFile file,@RequestParam String text){
+    @RequestMapping(method = RequestMethod.POST)
+    public String uploadFile(@RequestParam MultipartFile file, @RequestParam String text) {
 
         String name = file.getOriginalFilename();
         long size = file.getSize();
-        if (size >= 15728640l){
+        if (size >= 15728640l) {
             //16793600 max allowed document size
             return "文件不能大于15M！";
         }
-        logger.info("text = "+text+" name="+name+" size="+size);
+        logger.info("text = " + text + " name=" + name + " size=" + size);
 
         /*try (OutputStream out = new BufferedOutputStream(new FileOutputStream("/Users/wangchong/IdeaProjects/MySpringBootApp" + File.separator + name))) {
             BufferedInputStream in = new BufferedInputStream(file.getInputStream());
@@ -100,7 +100,7 @@ public class MultipartRestController {
             e.printStackTrace();
         }*/
         logger.info("uploaded............");
-    return "ok";
+        return "ok";
     }
 
 }

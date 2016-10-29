@@ -1,0 +1,1 @@
+db.lead.createIndex({ "person.mobile": 1, "status":1, "dealer_id":1},{ unique : true, partialFilterExpression: { "person.mobile": { $exists: true } }, name : 'idx_mobile_unique'});

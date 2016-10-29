@@ -1,0 +1,93 @@
+group 'otr'
+version '1.0'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven { url "http://repo.spring.io/plugins-release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+bootRepackage {
+    mainClass = 'com.daimler.otr.LeadManagementApp'
+}
+
+springBoot {
+    mainClass = 'com.daimler.otr.LeadManagementApp'
+    executable = true
+}
+
+bootRun {
+    addResources = true
+}
+
+group = 'com.daimler.otr'
+
+configurations {
+    providedRuntime
+}
+
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile 'org.mongodb:mongodb-driver:3.3.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.springframework', name: 'spring-test'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    testCompile group: 'commons-io', name: 'commons-io', version: '2.5'
+
+}
+
+
+
+task createJavaProject << {
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { it.mkdirs()}
+}
+
+task createWebProject(dependsOn: 'createJavaProject') << {
+    def webAppDir = file("$webAppDirName")
+    webAppDir.mkdirs()
+}
+
+
+def loadProperties = {String filename->
+    File pFile = file(filename)
+    Properties properties = new Properties()
+
+    pFile.withInputStream { stream->
+        properties.load(stream)
+    }
+    return properties
+}
+
+task configMongoDB << {
+    //execute sample : gradle -Penv=local configMongoDB
+    String env_param = env
+    println "update mongodb for environment:"+env_param
+    Properties mongoConfig = loadProperties("mongo_config.properties")
+    String db = mongoConfig['mongo.db.name']
+    String host = mongoConfig[env_param+'.mongodb.host']
+    String port = mongoConfig[env_param+'.mongodb.port']
+    exec {
+        commandLine 'mongo', '--host', host, '--port', port, db, 'mongo_build_v1.0.0.js'
+    }
+}

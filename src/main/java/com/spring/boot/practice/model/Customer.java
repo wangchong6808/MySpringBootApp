@@ -14,6 +14,7 @@ public class Customer extends Person {
     @JsonProperty("Address")
     private String address;
 
+    //@JsonProperty("contactList")
     private List<Contact> contacts;
 
     public List<Contact> getContacts() {
