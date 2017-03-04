@@ -17,5 +17,6 @@ public class Test1 {
         calendar.set(Calendar.MINUTE,59);
         calendar.set(Calendar.SECOND,59);
         System.out.println(calendar.getTime().getTime());
+        System.out.println(1);
     }
 }
