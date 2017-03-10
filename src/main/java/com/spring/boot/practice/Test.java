@@ -22,6 +22,7 @@ public class Test {
         System.out.println(Double.valueOf(Math.random()));
         System.out.println(Double.valueOf(Math.random()));
         System.out.println(3);
+        System.out.println(4);
 
     }
 
