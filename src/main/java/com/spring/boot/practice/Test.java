@@ -24,7 +24,7 @@ public class Test {
         System.out.println(Double.valueOf(Math.random()));
         System.out.println(3);
         System.out.println(4);
-
+        System.out.println(3);
     }
 
     private static void say(String words, FunctionalInterface fn){
